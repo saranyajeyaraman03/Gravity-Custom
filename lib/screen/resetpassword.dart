@@ -89,13 +89,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(15.0, 30.0, 0.0, 0.0),
                   child: Text('Reset',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.poppins(
                           fontSize: 50.dynamic, fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16.0, 100.0, 0.0, 0.0),
                   child: Text('Password?',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.poppins(
                           fontSize: 50.dynamic, fontWeight: FontWeight.bold)),
                 ),
               ],
@@ -107,7 +107,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: <Widget>[
                 Text(
                   'Enter the email address associated with your account.',
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.poppins(
                       fontSize: 20.dynamic,
                       fontWeight: FontWeight.bold,
                       color: Colors.blueGrey),
@@ -143,7 +143,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         child: Center(
                             child: Text(
                           'Reset Password',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                               fontSize: 16.dynamic),

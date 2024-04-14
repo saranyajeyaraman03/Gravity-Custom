@@ -15,7 +15,7 @@ class ProfileHelper extends ChangeNotifier {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.poppins(
                       fontSize: 18.dynamic,
                       color: ConstantColor.dartBlue,
                       fontWeight: FontWeight.bold,
@@ -25,7 +25,7 @@ class ProfileHelper extends ChangeNotifier {
                   const SizedBox(height: 15),
                   Text(
                     data,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.poppins(
                       fontSize: 16.dynamic,
                       color: Colors.black,
                       fontWeight: FontWeight.w500,

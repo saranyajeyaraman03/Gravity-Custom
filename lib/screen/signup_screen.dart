@@ -163,7 +163,7 @@ class _SignupScreenState extends State<SignupScreen> {
             SizedBox(height: 60.dynamic),
             Text(
               "Sign up",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 30.dynamic,
                 fontWeight: FontWeight.bold,
               ),
@@ -173,7 +173,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             Text(
               "Create your account",
-              style: GoogleFonts.montserrat(fontSize: 15.dynamic, color: Colors.grey[700]),
+              style: GoogleFonts.poppins(fontSize: 15.dynamic, color: Colors.grey[700]),
             ),
             SizedBox(
               height: 20.dynamic,
@@ -281,13 +281,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                  ),
+                  ), backgroundColor: ConstantColor.mediumBlue,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  primary: ConstantColor.mediumBlue,
                 ),
                 child: Text(
                   "Sign up",
-                  style: GoogleFonts.montserrat(fontSize: 20.dynamic, color: Colors.white),
+                  style: GoogleFonts.poppins(fontSize: 20.dynamic, color: Colors.white),
                 ),
               ),
             ),
@@ -295,7 +294,7 @@ class _SignupScreenState extends State<SignupScreen> {
             Center(
               child: Text(
                 "Or",
-                style: GoogleFonts.montserrat(fontSize: 16.dynamic, color: Colors.black),
+                style: GoogleFonts.poppins(fontSize: 16.dynamic, color: Colors.black),
               ),
             ),
             Row(
@@ -303,7 +302,7 @@ class _SignupScreenState extends State<SignupScreen> {
               children: <Widget>[
                 Text(
                   "Already have an account?",
-                  style: GoogleFonts.montserrat(fontSize: 16.dynamic),
+                  style: GoogleFonts.poppins(fontSize: 16.dynamic),
                 ),
                 TextButton(
                   onPressed: () {
@@ -311,7 +310,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                   child: Text(
                     "Login",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.poppins(
                       fontSize: 18.dynamic,
                       color: ConstantColor.mediumBlue,
                     ),

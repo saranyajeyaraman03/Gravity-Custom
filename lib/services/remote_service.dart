@@ -5,7 +5,9 @@ import 'package:http/http.dart';
 
 class RemoteServices {
   static var client = http.Client();
-  static String url = 'https://dev.gravitycustoms.net/auth/api/';
+  static String url = 'https://gravitycustoms.net/auth/api/';
+  static String carUrl = 'https://carapi.app/api/';
+  static String bookingUrl = 'https://gravitycustoms.net/';
 
   //login
   static Future<Response> login(String emailId, String password) async {
@@ -146,5 +148,200 @@ class RemoteServices {
       rethrow;
     }
   }
+
+  static Future<Response> performCarLogin() async {
+    String apiUrl = '${carUrl}auth/login';
+    print(apiUrl);
+
+    Map<String, String> payload = {
+      "api_token": "758d2b2c-2c0c-4385-85d1-23438c97a7db",
+      "api_secret": "72c8c5d91961aab47966e5dce963646a"
+    };
+
+    Map<String, String> headers = {
+      'accept': 'text/plain',
+      'Content-Type': 'application/json',
+    };
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: headers,
+      body: jsonEncode(payload),
+    );
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to perform car login: ${response.body}');
+    }
+  }
+
+  static Future<Response> getCarBuildYears(String jwtToken) async {
+    String apiUrl = '${carUrl}years';
+
+    try {
+      Map<String, String> headers = {
+        'accept': 'application/json',
+        'Authorization': 'Bearer $jwtToken',
+      };
+
+      final response = await http.get(
+        Uri.parse(apiUrl),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw Exception(
+            'Failed to load car build years: ${response.statusCode}');
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<Response> getCarNames(String jwtToken, int carYear) async {
+    try {
+      String apiUrl = '${carUrl}makes?limit=200&year=$carYear';
+
+      print(apiUrl);
+      var response = await http.get(
+        Uri.parse(apiUrl),
+        headers: {
+          'accept': 'application/json',
+          'Authorization': 'Bearer $jwtToken',
+        },
+      );
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw Exception('Failed to load car names');
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<Response> getCarModel(String jwtToken, int carNameId) async {
+    try {
+      String apiUrl = '${carUrl}models?limit=100&make_id=$carNameId';
+
+      print(apiUrl);
+      var response = await http.get(
+        Uri.parse(apiUrl),
+        headers: {
+          'accept': 'application/json',
+          'Authorization': 'Bearer $jwtToken',
+        },
+      );
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw Exception('Failed to load car names');
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  //Add Car
+  static Future<Response> addCar(String token, String carBrand, String carModel,
+      String carModelYear, String carType) async {
+    try {
+      print('${bookingUrl}booking/cars/');
+      String apiUrl = '${bookingUrl}booking/cars/';
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      };
+      Map<String, dynamic> requestBody = {
+        "car_brand": carBrand,
+        "car_model": carModel,
+        "car_model_year": carModelYear,
+        "car_type": carType,
+      };
+      print(requestBody);
+      String jsonBody = jsonEncode(requestBody);
+
+      http.Response response = await http.post(
+        Uri.parse(apiUrl),
+        headers: headers,
+        body: jsonBody,
+      );
+      print(response.body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //fetch Car details
+  static Future<Response> fetchCars(String token) async {
+    try {
+      print('${bookingUrl}booking/cars/');
+      String apiUrl = '${bookingUrl}booking/cars/';
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      };
+     
+      http.Response response = await http.get(
+        Uri.parse(apiUrl),
+        headers: headers,
+      );
+      print(response.body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+//delete car
+  static Future<Response> deleteCars(String token,String id) async {
+    try {
+      print('${bookingUrl}booking/cars/$id/');
+      String apiUrl = '${bookingUrl}booking/cars/$id/';
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      };
+     
+      http.Response response = await http.delete(
+        Uri.parse(apiUrl),
+        headers: headers,
+      );
+      print(response.body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+   //fetch Car Category
+  static Future<Response> fetchCarCategory(String token) async {
+    try {
+      print('${bookingUrl}booking/get-category/');
+      String apiUrl = '${bookingUrl}booking/get-category/';
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      };
+     
+      http.Response response = await http.get(
+        Uri.parse(apiUrl),
+        headers: headers,
+      );
+      print(response.body);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 
 }

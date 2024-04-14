@@ -19,18 +19,17 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 150.dynamic,
-            decoration:const BoxDecoration(
-              color: ConstantColor.dartBlue
-            ),
+            decoration: const BoxDecoration(color: ConstantColor.dartBlue),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     "Gravity Custom",
-                    style: GoogleFonts.montserrat(color: Colors.white, fontSize: 30.dynamic),
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontSize: 30.dynamic),
                   ),
-                  ],
+                ],
               ),
             ),
           ),
@@ -41,14 +40,15 @@ class NavDrawer extends StatelessWidget {
               children: <Widget>[
                 Text(
                   "Welcome",
-                  style: GoogleFonts.montserrat(fontSize: 16.dynamic, color: Colors.black),
+                  style: GoogleFonts.poppins(
+                      fontSize: 16.dynamic, color: Colors.black),
                 ),
                 SizedBox(
                   width: 10.dynamic,
                 ),
                 Text(
                   "Saranya.J",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.poppins(
                       fontSize: 18.dynamic,
                       color: ConstantColor.dartBlue,
                       fontWeight: FontWeight.bold),
@@ -64,13 +64,14 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Profile',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
               ),
             ),
             onTap: () {
+              Navigator.pop(context);
               Get.toNamed(NavPage.profile);
             },
           ),
@@ -82,13 +83,14 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Change Password',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
               ),
             ),
             onTap: () {
+              Navigator.pop(context);
               Get.toNamed(NavPage.changePassword);
             },
           ),
@@ -100,7 +102,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'My Cars',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -108,6 +110,7 @@ class NavDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
+              Get.toNamed(NavPage.myCar);
             },
           ),
           ListTile(
@@ -118,7 +121,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Orders',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -136,7 +139,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Subscriptions',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -154,7 +157,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'FAQs',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -172,7 +175,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Terms & Conditions',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -190,7 +193,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Privacy Policy',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -208,7 +211,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'About Us',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -229,7 +232,7 @@ class NavDrawer extends StatelessWidget {
             ),
             title: Text(
               'Logout',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: Colors.black,
                 letterSpacing: 0,
@@ -241,10 +244,10 @@ class NavDrawer extends StatelessWidget {
                   builder: (_) {
                     return CupertinoAlertDialog(
                       title: Text('Confirmation',
-                          style: GoogleFonts.montserrat(fontSize: 18.dynamic)),
+                          style: GoogleFonts.poppins(fontSize: 18.dynamic)),
                       content: Text(
                         'Are you sure you want to logout?',
-                        style: GoogleFonts.montserrat(fontSize: 16.dynamic),
+                        style: GoogleFonts.poppins(fontSize: 16.dynamic),
                       ),
                       actions: [
                         CupertinoButton(

@@ -108,7 +108,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       appBar: AppBar(
         title: Text(
           'Change Password',
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.poppins(
               fontSize: 26.dynamic,
               color: Colors.black,
               fontWeight: FontWeight.w500),
@@ -129,7 +129,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       //     },
       //     child: Text(
       //       'Change Password',
-      //       style: GoogleFonts.montserrat(
+      //       style: GoogleFonts.poppins(
       //           fontSize: 20.dynamic,
       //           color: ConstantColor.dartBlue,
       //           fontWeight: FontWeight.bold),
@@ -240,7 +240,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 //         child: Center(
                 //             child: Text(
                 //           'Change Password',
-                //           style: GoogleFonts.montserrat(
+                //           style: GoogleFonts.poppins(
                 //               fontWeight: FontWeight.bold,
                 //               color: Colors.white,
                 //               fontSize: 16.dynamic),
@@ -253,7 +253,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     _validateFields();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: ConstantColor.dartBlue,
+                    backgroundColor: ConstantColor.dartBlue,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

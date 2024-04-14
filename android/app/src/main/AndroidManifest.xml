@@ -10,7 +10,6 @@
     <application
         android:label="gravitycustom"
         android:name="${applicationName}"
-            android:enableOnBackInvokedCallback="true"
 
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -40,7 +39,7 @@
             android:value="@integer/google_play_services_version" />
 
               <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBQKtoS0_HcqX5-pC79yO3ilXzFyxnf078"/>
+               android:value="AIzaSyD6q9XJxe6gCZEFO7Oe3NyXglWUsUzI9BE"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

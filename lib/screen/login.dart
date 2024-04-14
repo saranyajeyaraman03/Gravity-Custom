@@ -35,8 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
       _emailError = _validateEmail(_emailController.text);
       _passwordError = _validatePassword(_passwordController.text);
 
-      if (_emailError.isEmpty && _passwordError.isEmpty) {
-        // If no validation errors, proceed with login
+      if (_emailError.isNotEmpty) {
+        SnackbarHelper.showSnackBar("", _emailError);
+      } else if (_passwordError.isNotEmpty) {
+        SnackbarHelper.showSnackBar("", _passwordError);
+      } else {
         _performLogin();
       }
     });
@@ -74,30 +77,19 @@ class _LoginScreenState extends State<LoginScreen> {
           accessToken,
         );
 
-        if (data.containsKey("Success")) {
-          String successMessage = data["Success"];
-          AuthHelper authHelper =
-              Provider.of<AuthHelper>(context, listen: false);
-          authHelper.setLoggedIn(true);
+        String successMessage = data["success"]; // Updated to use "success" key
 
-          SnackbarHelper.showSnackBar("Login Success", successMessage);
-          Get.offAll(
-            () => HomeScreen(),
-            predicate: (route) => false,
-          );
-        } else {
-          print("Unexpected response format: $data");
-        }
+        AuthHelper authHelper = Provider.of<AuthHelper>(context, listen: false);
+        authHelper.setLoggedIn(true);
+
+        SnackbarHelper.showSnackBar("Login Success", successMessage);
+        Get.offAll(
+          () => HomeScreen(),
+          predicate: (route) => false,
+        );
       } else {
         var data = jsonDecode(response.body);
-
-        if (data.containsKey("error")) {
-          String errorMsg = data["error"];
-          SnackbarHelper.showSnackBar("error", errorMsg);
-        } else {
-          SnackbarHelper.showSnackBar(
-              "error", "Login failed! Please try again!");
-        }
+        SnackbarHelper.showSnackBar("Login failed", data);
       }
     } catch (error) {
       print(error);
@@ -109,15 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              ConstantColor.dartBlue,
-              ConstantColor.dartBlue.withOpacity(0.8),
-              ConstantColor.dartBlue.withOpacity(0.6),
-            ],
-          ),
+        decoration: const BoxDecoration(
+          color: ConstantColor.dartBlue,
+         
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   Text(
                     "Gravity Custom",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.poppins(
                         color: Colors.white, fontSize: 40.dynamic),
                   ),
                   SizedBox(
@@ -161,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Text(
                           "Login",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 26.dynamic,
                             fontWeight: FontWeight.bold,
@@ -171,122 +157,125 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 30.dynamic,
                         ),
 
-                        TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            errorText: _emailError,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor:
-                                ConstantColor.mediumBlue.withOpacity(0.1),
-                            filled: true,
-                            prefixIcon: const Icon(Icons.email),
-                          ),
-                        ),
-                        SizedBox(height: 20.dynamic),
-                        TextField(
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            errorText: _passwordError,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide.none,
-                            ),
-                            fillColor:
-                                ConstantColor.mediumBlue.withOpacity(0.1),
-                            filled: true,
-                            prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isPasswordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _isPasswordVisible = !_isPasswordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                          obscureText: !_isPasswordVisible,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     borderRadius: BorderRadius.circular(10),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //         color: ConstantColor.dartBlue.withOpacity(0.4),
-                        //         blurRadius: 20,
-                        //         offset: const Offset(0, 10),
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   child: Column(
-                        //     children: <Widget>[
-                        //       Container(
-                        //         padding: const EdgeInsets.all(10),
-                        //         decoration: const BoxDecoration(
-                        //           border: Border(
-                        //             bottom: BorderSide(color: Colors.grey),
-                        //           ),
-                        //         ),
-                        //         child: const TextField(
-                        //           decoration: InputDecoration(
-                        //             hintText: "Email ",
-                        //             hintStyle: GoogleFonts.montserrat(color: Colors.grey),
-                        //             border: InputBorder.none,
-                        //             prefixIcon: Icon(
-                        //               Icons.mail_outline,
-                        //               color: Colors.grey,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       Container(
-                        //         padding: const EdgeInsets.all(10),
-                        //         decoration: const BoxDecoration(
-                        //           border: Border(
-                        //             bottom: BorderSide(color: Colors.grey),
-                        //           ),
-                        //         ),
-                        //         child: TextField(
-                        //           obscureText: !_isPasswordVisible,
-                        //           decoration: InputDecoration(
-                        //             hintText: "Password",
-                        //             hintStyle:
-                        //                 const GoogleFonts.montserrat(color: Colors.grey),
-                        //             border: InputBorder.none,
-                        //             prefixIcon: const Icon(
-                        //               Icons.lock,
-                        //               color: Colors.grey,
-                        //             ),
-                        //             suffixIcon: IconButton(
-                        //               icon: Icon(
-                        //                 _isPasswordVisible
-                        //                     ? Icons.visibility
-                        //                     : Icons.visibility_off,
-                        //                 color: Colors.grey,
-                        //               ),
-                        //               onPressed: () {
-                        //                 setState(() {
-                        //                   _isPasswordVisible =
-                        //                       !_isPasswordVisible;
-                        //                 });
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
+                        // TextField(
+                        //   controller: _emailController,
+                        //   decoration: InputDecoration(
+                        //     hintText: "Email",
+                        //     errorText: _emailError,
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(18),
+                        //       borderSide: BorderSide.none,
+                        //     ),
+                        //     fillColor:
+                        //         ConstantColor.mediumBlue.withOpacity(0.1),
+                        //     filled: true,
+                        //     prefixIcon: const Icon(Icons.email),
                         //   ),
                         // ),
+                        // SizedBox(height: 20.dynamic),
+                        // TextField(
+                        //   controller: _passwordController,
+                        //   decoration: InputDecoration(
+                        //     hintText: "Password",
+                        //     errorText: _passwordError,
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(18),
+                        //       borderSide: BorderSide.none,
+                        //     ),
+                        //     fillColor:
+                        //         ConstantColor.mediumBlue.withOpacity(0.1),
+                        //     filled: true,
+                        //     prefixIcon: const Icon(Icons.lock),
+                        //     suffixIcon: IconButton(
+                        //       icon: Icon(
+                        //         _isPasswordVisible
+                        //             ? Icons.visibility
+                        //             : Icons.visibility_off,
+                        //         color: Colors.black,
+                        //       ),
+                        //       onPressed: () {
+                        //         setState(() {
+                        //           _isPasswordVisible = !_isPasswordVisible;
+                        //         });
+                        //       },
+                        //     ),
+                        //   ),
+                        //   obscureText: !_isPasswordVisible,
+                        // ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ConstantColor.dartBlue.withOpacity(0.4),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: Colors.grey),
+                                  ),
+                                ),
+                                child: TextField(
+                                  controller: _emailController,
+                                  decoration: InputDecoration(
+                                    hintText: "Email ",
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: Colors.grey),
+                                    border: InputBorder.none,
+                                    prefixIcon: const Icon(
+                                      Icons.mail_outline,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: Colors.grey),
+                                  ),
+                                ),
+                                child: TextField(
+                                  controller: _passwordController,
+                                  obscureText: !_isPasswordVisible,
+                                  decoration: InputDecoration(
+                                    hintText: "Password",
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: Colors.grey),
+                                    border: InputBorder.none,
+                                    prefixIcon: const Icon(
+                                      Icons.lock,
+                                      color: Colors.grey,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _isPasswordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _isPasswordVisible =
+                                              !_isPasswordVisible;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
 
                         SizedBox(
                           height: 40.dynamic,
@@ -305,8 +294,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               "Forgot Password?",
-                              style: GoogleFonts.montserrat(
-                                color: ConstantColor.mediumBlue,
+                              style: GoogleFonts.poppins(
+                                color: ConstantColor.textBlue,
                                 fontSize: 14.dynamic,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -321,14 +310,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text('Does not have account?',
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.poppins(
                                     fontSize: 16.dynamic)),
                             TextButton(
                               child: Text(
                                 'Sign Up',
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.poppins(
                                     fontSize: 18.dynamic,
-                                    color: ConstantColor.mediumBlue),
+                                    color: ConstantColor.textBlue),
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -354,7 +343,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                             onPressed: _validateFields,
                             style: ElevatedButton.styleFrom(
-                              primary: ConstantColor.mediumBlue,
+                              backgroundColor: ConstantColor.mediumBlue,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -362,7 +351,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Center(
                               child: Text(
                                 "Login",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 18.dynamic,
                                   fontWeight: FontWeight.bold,

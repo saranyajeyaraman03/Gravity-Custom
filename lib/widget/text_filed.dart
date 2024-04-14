@@ -27,7 +27,7 @@ class CommonTextFiled extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.poppins(
           fontSize: 16.0,
           color: Colors.black,
           fontWeight: FontWeight.w600,

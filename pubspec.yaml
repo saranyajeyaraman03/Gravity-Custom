@@ -44,6 +44,7 @@ dependencies:
   get: ^4.1.4
   google_maps_flutter: ^2.5.3
   geolocator: ^7.6.2
+  geocoding: ^3.0.0
 
 
 dev_dependencies:
@@ -74,6 +75,8 @@ flutter:
     - assets/gravity_logo.png
     - assets/garvity_white_logo.png
     - assets/user_icon.png
+    - assets/servicebk.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

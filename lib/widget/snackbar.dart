@@ -5,6 +5,7 @@ import 'package:gravitycustom/common/colors.dart';
 import 'package:gravitycustom/dynamic_font.dart';
 
 class SnackbarHelper {
+  
   static void showSnackBar(String title,String message) {
     Get.snackbar(
       "",
@@ -12,7 +13,7 @@ class SnackbarHelper {
       snackPosition: SnackPosition.BOTTOM,
       titleText: Text(
         title,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.poppins(
           fontSize: 20.dynamic,
           fontWeight: FontWeight.bold,
           color: ConstantColor.dartBlue,
@@ -20,8 +21,27 @@ class SnackbarHelper {
       ),
       messageText: Text(
         message,
-        style: GoogleFonts.montserrat(fontSize: 16.dynamic),
+        style: GoogleFonts.poppins(fontSize: 16.dynamic),
       ),
     );
   }
+
+   static void showErrorSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.red,
+      behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+        label: 'Done',
+        textColor: Colors.white,
+        onPressed: () {
+        },
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
+
+

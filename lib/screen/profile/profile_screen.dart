@@ -46,7 +46,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text(
           'Profile',
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.poppins(
               fontSize: 26.dynamic,
               color: Colors.black,
               fontWeight: FontWeight.w500),
@@ -67,7 +67,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             // Name Field
             Text(
               "First Name",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: ConstantColor.dartBlue,
                 fontWeight: FontWeight.w700,
@@ -85,7 +85,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 
             Text(
               "Last Name",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: ConstantColor.dartBlue,
                 fontWeight: FontWeight.w700,
@@ -103,7 +103,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 
             Text(
               "Email",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: ConstantColor.dartBlue,
                 fontWeight: FontWeight.w700,
@@ -120,7 +120,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 16),
             Text(
               "Phone Number",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 18.dynamic,
                 color: ConstantColor.dartBlue,
                 fontWeight: FontWeight.w700,
@@ -142,7 +142,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 // Handle button press
               },
               style: ElevatedButton.styleFrom(
-                primary: ConstantColor.dartBlue,
+                backgroundColor: ConstantColor.dartBlue,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,6 +176,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             )
+         
           ],
         ),
       ),
@@ -199,7 +200,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 //       appBar: AppBar(
 //         title: Text(
 //           'Profile',
-//           style: GoogleFonts.montserrat(
+//           style: GoogleFonts.poppins(
 //             fontSize: 20.dynamic,
 //             fontWeight: FontWeight.bold,
 //             color: ConstantColor.white,
@@ -228,7 +229,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 //                 children: [
 //                   Text(
 //                     "Edit Profile",
-//                     style: GoogleFonts.montserrat(
+//                     style: GoogleFonts.poppins(
 //                       fontSize: 20.dynamic,
 //                       color: ConstantColor.dartBlue,
 //                       fontWeight: FontWeight.bold,
