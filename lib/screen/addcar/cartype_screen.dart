@@ -1,13 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:gravitycustom/common/colors.dart';
 import 'package:gravitycustom/common/constant.dart';
 import 'package:gravitycustom/dynamic_font.dart';
-import 'package:gravitycustom/main.dart';
 import 'package:gravitycustom/screen/addcar/addcar_screen.dart';
-import 'package:gravitycustom/screen/menu/mycar.dart';
 
 class SelectCarTypeScreen extends StatefulWidget {
   final bool homeStatus;

@@ -1,18 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gravitycustom/auth/shared_preference_helper.dart';
 import 'package:gravitycustom/common/colors.dart';
 import 'package:gravitycustom/common/constant.dart';
 import 'package:gravitycustom/dynamic_font.dart';
-import 'package:gravitycustom/main.dart';
 import 'package:gravitycustom/screen/addcar/cartype_screen.dart';
 import 'package:gravitycustom/screen/addcar/select_car_model_screen.dart';
 import 'package:gravitycustom/screen/addcar/select_car_screen.dart';
@@ -41,7 +36,6 @@ class _AddCarScreenState extends State<AddCarScreen> {
 
   Future<void> _carApi() async {
     try {
-      print(widget.homeStatus);
       var response = await RemoteServices.performCarLogin();
       print(response.body);
       if (mounted) {

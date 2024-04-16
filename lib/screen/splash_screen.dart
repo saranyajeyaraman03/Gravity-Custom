@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       AuthHelper authHelper = Provider.of<AuthHelper>(context, listen: false);
       await authHelper.loadLoggedInState();
 

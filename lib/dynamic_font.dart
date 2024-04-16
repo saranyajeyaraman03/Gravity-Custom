@@ -8,6 +8,6 @@ extension DoubleExtension on double {
 
 extension IntExtension on int {
   double get dynamic {
-    return (this.toDouble() * scale);
+    return (toDouble() * scale);
   }
 }

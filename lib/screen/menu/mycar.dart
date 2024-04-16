@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gravitycustom/auth/shared_preference_helper.dart';
 import 'package:gravitycustom/common/colors.dart';
 import 'package:gravitycustom/dynamic_font.dart';
-import 'package:gravitycustom/main.dart';
 import 'package:gravitycustom/model/car_model.dart';
 import 'package:gravitycustom/screen/addcar/addcar_screen.dart';
 import 'package:gravitycustom/services/remote_service.dart';

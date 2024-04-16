@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +18,7 @@ import 'package:gravitycustom/screen/addcar/addcar_screen.dart';
 import 'package:gravitycustom/services/remote_service.dart';
 import 'package:gravitycustom/widget/nav_drawer.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late String currentAddress = "";
   List<dynamic> allServices = [];
   late List<Car> cars = [];
+  var logger = Logger();
 
   void _onMapCreated(GoogleMapController controller) {
     googleMapController = controller;
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       String? token = await SharedPreferencesHelper.instance.getToken();
       var response = await RemoteServices.fetchCars(token!);
-      print(response.body);
+      logger.d(response.body);
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = jsonDecode(response.body);
         setState(() {
@@ -402,41 +403,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (service != null &&
                               service['category_image'] != null &&
                               service['category_name'] != null) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 80,
-                                    width: double.infinity,
-                                    color: Colors.white,
-                                    child: Image.network(
-                                      RemoteServices.bookingUrl +
-                                          service['category_image'],
-                                      fit: BoxFit.fill,
-                                      alignment: Alignment.topCenter,
-                                    ),
-                                  ),
-                                  Container(
-                                    color: Colors.white,
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        service['category_name'],
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 14.dynamic,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.left,
+                            return GestureDetector(
+                              onTap: () {
+                                print(
+                                    'Item clicked: ${service['category_name']}');
+                                    Get.toNamed(NavPage.selectService);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 80,
+                                      width: double.infinity,
+                                      color: Colors.white,
+                                      child: Image.network(
+                                        RemoteServices.bookingUrl +
+                                            service['category_image'],
+                                        fit: BoxFit.fill,
+                                        alignment: Alignment.topCenter,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Container(
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Align(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          service['category_name'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 14.dynamic,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           } else {
